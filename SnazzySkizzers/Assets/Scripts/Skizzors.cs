@@ -7,7 +7,8 @@ public class Skizzors : MonoBehaviour
 {
     PlayerControls controls;
     Animator anim;
-    Vector2 move;
+    Vector3 move;
+    Vector3 rotate;
 
     void Awake()
     {
@@ -17,6 +18,9 @@ public class Skizzors : MonoBehaviour
 
         controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Gameplay.Move.canceled += ctx => move = Vector2.zero;
+
+        controls.Gameplay.Rotate.performed += ctx => rotate = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Rotate.canceled += ctx => rotate = Vector2.zero;
 
         anim = GetComponent<Animator>();
     }
@@ -31,8 +35,11 @@ public class Skizzors : MonoBehaviour
 
     void Update()
     {
-        Vector2 m = new Vector2(move.x, move.y) * Time.deltaTime;
+        Vector3 m = new Vector3(move.x, move.y, 0) * Time.deltaTime;
         transform.Translate(m, Space.World);
+
+        Vector3 r = new Vector3(0, 0, -rotate.x) * 100f * Time.deltaTime;
+        transform.rotation = Quaternion.LookRotation(r, m);
     }
 
     void OnEnable()
