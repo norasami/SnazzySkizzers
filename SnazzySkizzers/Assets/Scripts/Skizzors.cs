@@ -6,9 +6,13 @@ using UnityEngine.InputSystem;
 public class Skizzors : MonoBehaviour
 {
     PlayerControls controls;
-    Animator anim;
+    Animator skizzorsAnim;
     Vector3 move;
     Vector3 rotate;
+    Transform skizzorsTransform;
+    GameObject[] targetCrosses;
+    
+    
 
     void Awake()
     {
@@ -21,22 +25,45 @@ public class Skizzors : MonoBehaviour
 
         controls.Gameplay.Rotate.performed += ctx => rotate = ctx.ReadValue<Vector2>();
         controls.Gameplay.Rotate.canceled += ctx => rotate = Vector2.zero;
+        
+        skizzorsTransform = GameObject.FindWithTag("Player").transform;
 
-        anim = GetComponent<Animator>();
-    }
+        skizzorsAnim = GetComponent<Animator>();
 
-    void Cut()
-    {
-        if (anim != null)
-        {
-            anim.SetTrigger("UseSkizzors");
-        }
+        targetCrosses = GameObject.FindWithTag("Manager").GetComponent<TargetManager>().targets;
     }
 
     void Update()
     {
         Vector3 m = new Vector3(move.x, move.y, 0) * Time.deltaTime;
         transform.Translate(m, Space.World);
+        
+        Vector3 skizzorsPosition = skizzorsTransform.position;
+        if ((skizzorsPosition.x + m.x) < -1.4f)
+        {
+            move.x = -1.4f - skizzorsPosition.x;
+        }
+        else if ((skizzorsPosition.x + m.x) > 1.4f)
+        {
+            move.x = 1.4f - skizzorsPosition.x;
+        }
+        else
+        {
+            m = new Vector3(move.x, move.y, 0) * Time.deltaTime;
+        }
+
+        if ((skizzorsPosition.y + m.y) < -0.9f)
+        {
+            move.y = -0.9f - skizzorsPosition.y;
+        }
+        else if ((skizzorsPosition.y + m.y) > 2.1f)
+        {
+            move.y = 2.1f - skizzorsPosition.y;
+        }
+        else
+        {
+            m = new Vector3(move.x, move.y, 0) * Time.deltaTime;
+        }
 
         Vector3 r = new Vector3(0, 0, -rotate.x) * 100f * Time.deltaTime;
         transform.rotation = Quaternion.LookRotation(r, m);
@@ -50,5 +77,28 @@ public class Skizzors : MonoBehaviour
     void OnDisable()
     {
         controls.Gameplay.Disable();
+    }
+
+    public void Cut()
+    {
+        if (skizzorsAnim != null)
+        {
+            skizzorsAnim.SetTrigger("UseSkizzors");
+        }
+
+        for(int i = 0; i < targetCrosses.Length; i++)
+        {
+            if(targetCrosses[i].GetComponent<SkizzorsCutPoint>().CuttingTime == true && targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossAnim != null)
+            {
+                targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossAnim.SetTrigger("CutCross");
+                targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossCut = true;
+                Debug.Log("Cross Cut is true");
+            }
+            else
+            {
+                targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossCut = false;
+                Debug.Log("Cross Cut is false");
+            }
+        }
     }
 }
