@@ -7,12 +7,13 @@ public class Skizzors : MonoBehaviour
 {
     PlayerControls controls;
     Animator skizzorsAnim;
+    Animator pantsAnimation;
     Vector3 move;
     Vector3 rotate;
     Transform skizzorsTransform;
     GameObject[] targetCrosses;
-    
-    
+
+    int cutPoints;
 
     void Awake()
     {
@@ -31,6 +32,9 @@ public class Skizzors : MonoBehaviour
         skizzorsAnim = GetComponent<Animator>();
 
         targetCrosses = GameObject.FindWithTag("Manager").GetComponent<TargetManager>().targets;
+        cutPoints = targetCrosses.Length;
+
+        pantsAnimation = GameObject.FindWithTag("Clothing").GetComponent<Animator>();
     }
 
     void Update()
@@ -93,12 +97,19 @@ public class Skizzors : MonoBehaviour
                 targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossAnim.SetTrigger("CutCross");
                 targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossCut = true;
                 Debug.Log("Cross Cut is true");
+
+                cutPoints--;
             }
             else
             {
                 targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossCut = false;
                 Debug.Log("Cross Cut is false");
             }
+        }
+
+        if(cutPoints <= 0)
+        {
+            pantsAnimation.SetTrigger("AllCrossesCut");
         }
     }
 }
