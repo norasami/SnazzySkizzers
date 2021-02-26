@@ -300,7 +300,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &460851932
 MonoBehaviour:
@@ -528,7 +528,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &551319072
 MonoBehaviour:
@@ -673,7 +673,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &613666612
 MonoBehaviour:
@@ -818,7 +818,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &665303489
 MonoBehaviour:
@@ -963,7 +963,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &790057934
 MonoBehaviour:
@@ -1210,7 +1210,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &996770716
 MonoBehaviour:
@@ -1355,7 +1355,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &1122431426
 MonoBehaviour:
@@ -1500,7 +1500,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &1164609338
 MonoBehaviour:
@@ -1809,7 +1809,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &1347007740
 MonoBehaviour:
@@ -1954,7 +1954,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4096, y: 4096}
+  m_Size: {x: 3000, y: 3000}
   m_EdgeRadius: 0
 --- !u!114 &2126930945
 MonoBehaviour:

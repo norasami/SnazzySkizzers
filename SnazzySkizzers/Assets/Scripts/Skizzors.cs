@@ -13,7 +13,7 @@ public class Skizzors : MonoBehaviour
     Transform skizzorsTransform;
     GameObject[] targetCrosses;
 
-    int cutPoints;
+    int crossPoint;
 
     void Awake()
     {
@@ -32,9 +32,11 @@ public class Skizzors : MonoBehaviour
         skizzorsAnim = GetComponent<Animator>();
 
         targetCrosses = GameObject.FindWithTag("Manager").GetComponent<TargetManager>().targets;
-        cutPoints = targetCrosses.Length;
+        
 
         pantsAnimation = GameObject.FindWithTag("Clothing").GetComponent<Animator>();
+
+        crossPoint = targetCrosses.Length;
     }
 
     void Update()
@@ -71,7 +73,15 @@ public class Skizzors : MonoBehaviour
 
         Vector3 r = new Vector3(0, 0, -rotate.x) * 100f * Time.deltaTime;
         transform.rotation = Quaternion.LookRotation(r, m);
+
+        if (crossPoint <= 0)
+        {
+            pantsAnimation.SetTrigger("AllCrossesCut");
+            Debug.Log("You win!");
+        }
     }
+
+    
 
     void OnEnable()
     {
@@ -90,26 +100,14 @@ public class Skizzors : MonoBehaviour
             skizzorsAnim.SetTrigger("UseSkizzors");
         }
 
-        for(int i = 0; i < targetCrosses.Length; i++)
+        for (int i = 0; i < targetCrosses.Length; i++)
         {
-            if(targetCrosses[i].GetComponent<SkizzorsCutPoint>().CuttingTime == true && targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossAnim != null)
+            if (targetCrosses[i].GetComponent<SkizzorsCutPoint>().CuttingTime == true && targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossAnim != null && targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossCut != true)
             {
                 targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossAnim.SetTrigger("CutCross");
                 targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossCut = true;
-                Debug.Log("Cross Cut is true");
-
-                cutPoints--;
+                crossPoint--;
             }
-            else
-            {
-                targetCrosses[i].GetComponent<SkizzorsCutPoint>().crossCut = false;
-                Debug.Log("Cross Cut is false");
-            }
-        }
-
-        if(cutPoints <= 0)
-        {
-            pantsAnimation.SetTrigger("AllCrossesCut");
         }
     }
 }
